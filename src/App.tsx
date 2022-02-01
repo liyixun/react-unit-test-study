@@ -6,8 +6,11 @@ import logo from "./logo.svg";
 import TodoContent from "./components/todo-content";
 import TodoReport from "./components/todo-report";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./store";
+import Counter from "./pages/Counter";
 
-function App() {
+function AppContent() {
   const showMessage = useCallback(() => {
     message.info(`展示一个提示`);
   }, []);
@@ -51,10 +54,21 @@ function App() {
               />
             </div>
           </Route>
+          <Route exact={true} path="/counter">
+            <Counter />
+          </Route>
         </Switch>
       </BrowserRouter>
     </div>
   );
 }
+
+const App = () => {
+  return (
+    <Provider store={store}>
+      <AppContent />
+    </Provider>
+  );
+};
 
 export default App;
